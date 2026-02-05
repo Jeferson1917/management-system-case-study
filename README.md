@@ -26,38 +26,42 @@ This approach ensures high maintainability, scalability, and testability. Change
 
 The system runs in a containerized environment designed for security, abstraction, and scalability.
 
-```
+```mermaid
 graph TD
+    %% Define styles
     subgraph Internet
         User((User / Stakeholders))
     end
 
     subgraph "Server Infrastructure (Docker)"
         Nginx[Nginx Reverse Proxy]
-
+        
         subgraph "Backend Container"
             API[.NET 8 API]
             Layer1[Controllers]
             Layer2[Services / Domain]
             Layer3[Repository Layer]
         end
-
+        
         subgraph "Database Container"
             DB[(PostgreSQL)]
         end
     end
 
-    User -->|HTTPS 443| Nginx
-    Nginx -->|Proxy Pass| API
-
+    %% Communication Flow
+    User -- "HTTPS (Port 443)" --> Nginx
+    Nginx -- "Proxy Pass (Internal Network)" --> API
+    
+    %% Internal Layers
     API --> Layer1
     Layer1 --> Layer2
     Layer2 --> Layer3
-    Layer3 -->|SQL Queries| DB
+    Layer3 -- "SQL / Integrity Constraints" --> DB
 
-    style Nginx fill:#009639,stroke:#ffffff,color:#ffffff
-    style API fill:#512bd4,stroke:#ffffff,color:#ffffff
-    style DB fill:#336791,stroke:#ffffff,color:#ffffff
+    %% Styling
+    style Nginx fill:#009639,stroke:#fff,color:#fff
+    style API fill:#512bd4,stroke:#fff,color:#fff
+    style DB fill:#336791,stroke:#fff,color:#fff
 
 ```
 3. Database Modeling

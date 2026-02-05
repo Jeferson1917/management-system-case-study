@@ -20,13 +20,13 @@ High Availability & Security: A system capable of handling sensitive institution
 
 I implemented a Clean / Layered Architecture to decouple business logic from infrastructure concerns.
 
-Why?
 This approach ensures high maintainability, scalability, and testability. Changes in infrastructure (database, services, cloud providers) do not affect core business rules.
 
 2. Infrastructure & System Design (Diagram)
 
 The system runs in a containerized environment designed for security, abstraction, and scalability.
 
+```
 graph TD
     subgraph Internet
         User((User / Stakeholders))
@@ -59,6 +59,7 @@ graph TD
     style API fill:#512bd4,stroke:#ffffff,color:#ffffff
     style DB fill:#336791,stroke:#ffffff,color:#ffffff
 
+```
 3. Database Modeling
 
 I designed a relational schema focused on referential integrity and auditability.

@@ -26,37 +26,70 @@ The system was designed to run in a containerized environment with a focus on se
 
 ```mermaid
 graph TD
-    %% Define styles
     subgraph Internet
         User((User / Stakeholders))
     end
 
     subgraph "Server Infrastructure (Docker)"
         Nginx[Nginx Reverse Proxy]
-        
+
         subgraph "Backend Container"
             API[.NET 8 API]
             Layer1[Controllers]
             Layer2[Services / Domain]
             Layer3[Repository Layer]
         end
-        
+
         subgraph "Database Container"
             DB[(PostgreSQL)]
         end
     end
 
-    %% Communication Flow
-    User -- "HTTPS (Port 443)" --> Nginx
-    Nginx -- "Proxy Pass (Internal Network)" --> API
-    
-    %% Internal Layers
+    User -->|HTTPS 443| Nginx
+    Nginx -->|Proxy Pass| API
+
     API --> Layer1
     Layer1 --> Layer2
     Layer2 --> Layer3
-    Layer3 -- "SQL / Integrity Constraints" --> DB
+    Layer3 -->|SQL Queries| DB
 
-    %% Styling
-    style Nginx fill:#009639,stroke:#fff,color:#fff
-    style API fill:#512bd4,stroke:#fff,color:#fff
-    style DB fill:#336791,stroke:#fff,color:#fff
+    style Nginx fill:#009639,stroke:#ffffff,color:#ffffff
+    style API fill:#512bd4,stroke:#ffffff,color:#ffffff
+    style DB fill:#336791,stroke:#ffffff,color:#ffffff
+
+```markdown
+    style Nginx fill:#009639,stroke:#ffffff,color:#ffffff
+    style API fill:#512bd4,stroke:#ffffff,color:#ffffff
+    style DB fill:#336791,stroke:#ffffff,color:#ffffff
+
+3. Database Modeling
+
+I designed a relational schema focused on referential integrity.
+
+Challenge: Managing the relationship between complex institutional programs and their specific KPIs.
+
+Solution: A normalized structure that supports historical tracking of goals and evidence, ensuring that all data is traceable.
+
+4. Security & DevOps (Nginx & Docker)
+
+Containerization: Used Docker to encapsulate the environment, ensuring the app runs identically in development and production.
+
+Reverse Proxy (Nginx): Configured to manage SSL termination, load balancing, and to hide the application server from direct public exposure, adding a crucial layer of security.
+
+🚀 Key Achievements
+
+Full Cycle Ownership: I handled everything from initial requirements gathering with stakeholders to final deployment.
+
+Process Automation: The automated reporting engine significantly reduced the time spent on administrative tasks by ensuring data was collected and formatted in real-time.
+
+🧠 Lessons Learned
+
+Stakeholder Communication: Learned how to translate complex government requirements into technical specifications.
+
+Full-Stack Responsibility: Managing both the database integrity and the UI/UX consistency taught me the importance of a holistic view of software engineering.
+
+Security-First Mindset: Implementing Nginx and Docker taught me how to protect enterprise applications in a production environment.
+
+📈 Impact
+
+The system is currently the primary tool for monitoring management contracts at SergipeTec, providing transparency and efficiency for the SEDETEC (Secretariat of State for Economic Development, Science, and Technology).

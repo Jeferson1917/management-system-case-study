@@ -16,7 +16,6 @@ I implemented a Clean / Layered Architecture to decouple business logic from inf
 This approach ensures high maintainability, scalability, and testability. Changes in infrastructure (database, services, cloud providers) do not affect core business rules.
 2. Infrastructure & System Design
 The system runs in a containerized environment designed for security, abstraction, and scalability.
-
 ```mermaid
 graph TD
     %% Define styles
@@ -60,10 +59,9 @@ I designed a relational schema focused on referential integrity and auditability
 Challenge: Managing complex institutional programs, each with multiple KPIs, evidence files, deadlines, and historical revisions.
 Solution: A fully normalized relational model with:
 
-Historical versioning of goals
 Evidence traceability
 Referential constraints
-Auditable timestamps
+Dashboard data tracking
 
 This ensures data reliability, traceability, and legal compliance.
 4. Security & DevOps
